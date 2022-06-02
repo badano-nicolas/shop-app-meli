@@ -18,7 +18,7 @@ cd shop-app-meli
 2. Install dependencies, for server and client.
 
 ```
-npm install && cd client/ && npm install
+npm install 
 ```
 
 ### Run server
