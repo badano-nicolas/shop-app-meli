@@ -9,7 +9,7 @@ export default function ItemsDetail({ data }: any) {
         <title>Shop app Meli</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main>
+      <main className="bg-white-meli">
         <Header />
         <div className="container mx-auto bg-white mb-6 mt-3 rounded-md p-6">
           <h1 className="text-xl font-semibold mt-2">{data.title}</h1>
