@@ -3,10 +3,9 @@ import Image from "next/image";
 import Link from "next/link";
 import Header from "../../components/Header";
 import shippingLogo from "../../public/assets/ic_shipping@2x.png";
+import { SearchItems, Category } from "../../actions/searchActions";
 
 export default function Items({ data }: any) {
-  console.log(data[0]);
-
   return (
     <div>
       <Head>
@@ -15,7 +14,7 @@ export default function Items({ data }: any) {
       </Head>
       <main className="bg-white-meli">
         <Header />
-        {data.length === 0 ? (
+        {data.items.length === 0 ? (
           <div className="container mx-auto bg-white rounded-sm">
             {" "}
             <h3 className="text-2xl text-center flex-grow pt-64">
@@ -25,7 +24,7 @@ export default function Items({ data }: any) {
         ) : (
           <>
             <div className="container mx-auto bg-white">
-              {data.map((item: any) => (
+              {data.items.map((item: any) => (
                 <Link key={item.id} href={`/items/${item.id}`}>
                   <div className="flex flex-col border-b p-4 my-4 cursor-pointer text-dark-meli">
                     <div className="flex flex-row">
@@ -76,7 +75,23 @@ export default function Items({ data }: any) {
 export async function getServerSideProps(con: any) {
   const query = con.query.search;
   const data = await searchItemsByTerm(query);
-  return { props: { data: data.results.slice(0, 4) } };
+
+  const categories = data.available_filters[0].values;
+  const parsedCategories: string[] = [...categories].map(
+    (category: Category) => {
+      return category.name;
+    }
+  );
+
+  const parsedData: SearchItems = {
+    author: {
+      name: "Nicolas",
+      lastname: "Badano",
+    },
+    categories: parsedCategories,
+    items: data.results.slice(0, 4),
+  };
+  return { props: { data: parsedData } };
 }
 
 const baseURL: string = "https://api.mercadolibre.com";
