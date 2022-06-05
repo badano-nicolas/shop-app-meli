@@ -27,7 +27,7 @@ export default function Items({ data }: any) {
           </div>
         ) : (
           <>
-            <div className="container mx-auto bg-white mt-3 rounded-md">
+            <div className="container mx-auto bg-white mt-3 rounded-sm">
               {items.map((item: Item) => (
                 <Link key={item.id} href={`/items/${item.id}`}>
                   <div className="flex flex-col border-b cursor-pointer text-dark-meli">

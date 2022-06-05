@@ -5,7 +5,12 @@ const Breadcrumb = ({ categories }: any) => {
   return (
     <div className="flex flex-row text-sm py-4 text-gray-meli pb-2 container mx-auto">
       {categories.map((category: any, index: number) => (
-        <div key={category} className="pr-3">
+        <div
+          key={category}
+          className={
+            "pr-1 " + (categories.length - 1 === index ? "font-medium" : "")
+          }
+        >
           {index !== 0 && " > "}
           {category}
         </div>
