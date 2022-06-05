@@ -9,7 +9,7 @@ const Home: NextPage = () => {
         <title>Shop app Meli</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main className="bg-white-meli">
+      <main className="bg-white-meli min-h-screen">
         <Header />
       </main>
     </div>

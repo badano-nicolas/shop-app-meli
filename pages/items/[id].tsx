@@ -1,19 +1,22 @@
 import Head from "next/head";
 import Image from "next/image";
 import { SearchItem } from "../../actions/searchActions";
+import Breadcrumb from "../../components/Breadcrumb";
 import Header from "../../components/Header";
 
 export default function ItemsDetail({ data }: any) {
   const item = data.item;
+  console.log(item);
   return (
-    <div>
+    <div className="">
       <Head>
         <title>Shop app Meli</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main className="bg-white-meli text-dark-meli">
+      <main className="bg-white-meli text-dark-meli min-h-screen">
         <Header />
-        <div className="container mx-auto bg-white mb-6 mt-3 rounded-md p-6">
+        <Breadcrumb categories={item.categories} />
+        <div className="container mx-auto bg-white mb-6 mt-3 p rounded-md p-6">
           <div className="flex flex-col md:flex-row border-b pb-6 md:border-b-0 md:pb-0">
             <div className="md:w-1/2">
               <Image
@@ -27,10 +30,10 @@ export default function ItemsDetail({ data }: any) {
             <div className="flex flex-col md:pl-4">
               <span className="text-sm">{item.sold_quantity} vendidos</span>
               <h1 className="text-2xl font-semibold mt-2">{item.title}</h1>
-              <h2 className="my-4"></h2>
+              <h2 className="my-4">$</h2>
               <button
                 type="button"
-                className="mt-4 bg-blue-meli  text-white-meli py-2 px-4 rounded"
+                className="mt-4 bg-blue-meli  text-white py-2 px-4 rounded"
               >
                 Comprar
               </button>
