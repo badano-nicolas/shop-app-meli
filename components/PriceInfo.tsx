@@ -1,6 +1,11 @@
 import React from "react";
+import { Price } from "../actions/searchActions";
 
-const PriceInfo = ({ price }: any) => {
+type PriceInfoProps = {
+  price: Price;
+};
+
+const PriceInfo = ({ price }: PriceInfoProps) => {
   return (
     <div>
       {price.amount.toLocaleString("es-AR", {

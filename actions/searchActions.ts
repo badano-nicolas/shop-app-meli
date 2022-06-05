@@ -25,6 +25,7 @@ export interface Item {
   address?: string;
   sold_quantity?: number;
   description?: string;
+  categories?: string[];
 }
 
 export interface Price {

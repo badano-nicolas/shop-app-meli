@@ -20,14 +20,20 @@ function Header() {
   return (
     <header className="p-4 bg-yellow-meli">
       <div className="mx-auto container flex flex-row justify-between">
-        <Image src={logo.src} alt="Mercado Libre Logo" width={50} height={10} />
+        <Image
+          src={logo.src}
+          alt="Mercado Libre Logo"
+          width={53}
+          height={36}
+          layout="fixed"
+        />
 
         <div className="flex flex-col justify-center align-center flex-grow ml-4">
           <form onSubmit={handleSubmit}>
             <div className="flex flex-row justify-between rounded-sm py-2 px-4 w-full appearance-none leading-normal bg-white">
               <input
                 ref={inputRef}
-                placeholder="Nunca dejes de buscar"
+                placeholder="Buscar productos, marcas y más..."
                 type="text"
                 defaultValue={searchTerm}
                 className="focus:outline-none flex-grow bg-white "

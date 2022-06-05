@@ -13,10 +13,10 @@ export default function ItemsDetail({ data }: any) {
         <title>Shop app Meli</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main className="bg-white-meli text-dark-meli min-h-screen">
+      <main className="bg-white-meli text-dark-meli min-h-screen pb-8">
         <Header />
         <Breadcrumb categories={item.categories} />
-        <div className="container mx-auto bg-white mb-6 mt-3 rounded-sm p-8 ">
+        <div className="container mx-auto bg-white rounded-sm p-8 ">
           <div className="flex flex-col md:flex-row border-b pb-6 md:border-b-0 md:pb-0 justify-between">
             <div className="md:w-1/2 md:pr-8">
               <Image
@@ -72,9 +72,11 @@ export async function getServerSideProps(con: any) {
     shipping: { free_shipping },
     sold_quantity,
     currency_id,
+    category_id,
   } = data;
 
   const { plain_text } = descriptionData;
+  const categories = await getItemCategories(category_id);
 
   const parsedData: SearchItem = {
     author: {
@@ -94,6 +96,9 @@ export async function getServerSideProps(con: any) {
       free_shipping: free_shipping,
       sold_quantity: sold_quantity,
       description: plain_text,
+      categories: categories.path_from_root.map(
+        (category: any) => category.name
+      ),
     },
   };
 
@@ -110,6 +115,12 @@ const getItemDataById = async (id: string) => {
 
 const getItemDescriptionById = async (id: string) => {
   const res = await fetch(baseURL + "/items/" + id + "/description");
+  const data = await res.json();
+  return data;
+};
+
+const getItemCategories = async (categoryId: string) => {
+  const res = await fetch(baseURL + "/categories/" + categoryId);
   const data = await res.json();
   return data;
 };

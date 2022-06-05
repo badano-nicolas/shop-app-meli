@@ -15,7 +15,7 @@ export default function Items({ data }: any) {
         <title>Shop app Meli</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main className="bg-white-meli text-dark-meli min-h-screen">
+      <main className="bg-white-meli text-dark-meli min-h-screen pb-8">
         <Header />
         <Breadcrumb categories={data.categories} />
         {items.length === 0 ? (
@@ -26,7 +26,7 @@ export default function Items({ data }: any) {
           </div>
         ) : (
           <>
-            <div className="container mx-auto bg-white mt-3 rounded-sm">
+            <div className="container mx-auto bg-white rounded-sm">
               {items.map((item: Item) => (
                 <Link key={item.id} href={`/items/${item.id}`}>
                   <div className="flex flex-col border-b cursor-pointer text-dark-meli">
@@ -37,6 +37,7 @@ export default function Items({ data }: any) {
                           alt={item.title}
                           width={180}
                           height={180}
+                          layout="fixed"
                           className="rounded"
                         ></Image>
                       </div>
@@ -60,7 +61,9 @@ export default function Items({ data }: any) {
                           </div>
                         </div>
 
-                        <div className="text-lg max-w-lg">{item.title}</div>
+                        <div className="text-lg max-w-sm md:max-w-xs">
+                          <p className="text-ellipsis">{item.title}</p>
+                        </div>
                       </div>
                       <div className="hidden md:flex text-xs w-48 text-gray-meli pt-2">
                         <p className="pt-12"> {item.address}</p>

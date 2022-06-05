@@ -1,26 +1,26 @@
 import React from "react";
 
-const Breadcrumb = ({ categories }: any) => {
-  console.log("categ ", categories);
+type BreadcrumbProps = {
+  categories: string[];
+};
+
+const Breadcrumb = ({ categories }: BreadcrumbProps) => {
   return (
-    <div className="flex flex-row text-sm py-4 text-gray-meli pb-2 container mx-auto">
+    <div className="flex flex-row text-sm py-4 text-gray-meli container mx-auto">
       {categories.map((category: any, index: number) => (
-        <div
-          key={category}
-          className={
-            "pr-1 " + (categories.length - 1 === index ? "font-medium" : "")
-          }
-        >
-          {index !== 0 && " > "}
-          {category}
+        <div key={category} className="px-1 flex flex-row">
+          <p> {index !== 0 && " > "}</p>
+          <p
+            className={
+              "pl-1 " + (categories.length - 1 === index && "font-medium")
+            }
+          >
+            {category}
+          </p>
         </div>
       ))}
     </div>
   );
-};
-
-Breadcrumb.defaultProps = {
-  categories: [],
 };
 
 export default Breadcrumb;
