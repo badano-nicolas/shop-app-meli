@@ -8,8 +8,7 @@ import Breadcrumb from "../../components/Breadcrumb";
 import PriceInfo from "../../components/PriceInfo";
 
 export default function Items({ data }: any) {
-  console.log(data.items);
-  let items: Item[] = data.items;
+  const items: Item[] = data.items;
   return (
     <div className="">
       <Head>

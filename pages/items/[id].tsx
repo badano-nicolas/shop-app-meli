@@ -7,10 +7,6 @@ import PriceInfo from "../../components/PriceInfo";
 
 export default function ItemsDetail({ data }: any) {
   const item = data.item;
-  const itemCondition = {
-    new: "Nuevo",
-    used: "Usado",
-  };
   return (
     <div className="">
       <Head>
@@ -20,9 +16,9 @@ export default function ItemsDetail({ data }: any) {
       <main className="bg-white-meli text-dark-meli min-h-screen">
         <Header />
         <Breadcrumb categories={item.categories} />
-        <div className="container mx-auto bg-white mb-6 mt-3 rounded-sm p-8">
-          <div className="flex flex-col md:flex-row border-b pb-6 md:border-b-0 md:pb-0">
-            <div className="md:w-1/2">
+        <div className="container mx-auto bg-white mb-6 mt-3 rounded-sm p-8 ">
+          <div className="flex flex-col md:flex-row border-b pb-6 md:border-b-0 md:pb-0 justify-between">
+            <div className="md:w-1/2 md:pr-8">
               <Image
                 src={item.picture}
                 alt={item.title}
@@ -42,7 +38,7 @@ export default function ItemsDetail({ data }: any) {
               </div>
               <button
                 type="button"
-                className="bg-blue-meli  text-white py-2 mt-8 rounded mr-8"
+                className="bg-blue-meli  text-white py-2 mt-8 rounded"
               >
                 Comprar
               </button>
