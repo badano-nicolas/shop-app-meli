@@ -5,9 +5,11 @@ import Header from "../../components/Header";
 import shippingLogo from "../../public/assets/ic_shipping@2x.png";
 import { SearchItems, Category, Item } from "../../actions/searchActions";
 import Breadcrumb from "../../components/Breadcrumb";
+import PriceInfo from "../../components/PriceInfo";
 
 export default function Items({ data }: any) {
   console.log(data.items);
+  let items: Item[] = data.items;
   return (
     <div className="">
       <Head>
@@ -17,7 +19,7 @@ export default function Items({ data }: any) {
       <main className="bg-white-meli text-dark-meli min-h-screen">
         <Header />
         <Breadcrumb categories={data.categories} />
-        {data.items.length === 0 ? (
+        {items.length === 0 ? (
           <div className="container mx-auto bg-white rounded-sm">
             <h3 className="text-2xl text-center flex-grow pt-64">
               No hay publicaciones que coincidan con tu búsqueda.
@@ -26,7 +28,7 @@ export default function Items({ data }: any) {
         ) : (
           <>
             <div className="container mx-auto bg-white mt-3 rounded-md">
-              {data.items.map((item: any) => (
+              {items.map((item: Item) => (
                 <Link key={item.id} href={`/items/${item.id}`}>
                   <div className="flex flex-col border-b cursor-pointer text-dark-meli">
                     <div className="flex flex-row">
@@ -43,11 +45,7 @@ export default function Items({ data }: any) {
                       <div className="flex-grow flex flex-col justify-start">
                         <div className="flex flex-row pt-8 pb-4">
                           <div className="text-2xl">
-                            {item.price.amount.toLocaleString("es-AR", {
-                              style: "currency",
-                              currency: item.price.currency,
-                              minimumFractionDigits: item.price.decimals,
-                            })}
+                            <PriceInfo price={item.price} />
                           </div>
                           <div className="flex items-center pl-2">
                             {item.free_shipping ? (
