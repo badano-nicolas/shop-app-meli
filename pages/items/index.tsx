@@ -3,10 +3,11 @@ import Image from "next/image";
 import Link from "next/link";
 import Header from "../../components/Header";
 import shippingLogo from "../../public/assets/ic_shipping@2x.png";
-import { SearchItems, Category } from "../../actions/searchActions";
+import { SearchItems, Category, Item } from "../../actions/searchActions";
 import Breadcrumb from "../../components/Breadcrumb";
 
 export default function Items({ data }: any) {
+  console.log(data.items);
   return (
     <div className="">
       <Head>
@@ -24,14 +25,14 @@ export default function Items({ data }: any) {
           </div>
         ) : (
           <>
-            <div className="container mx-auto bg-white mb-6 mt-3 p rounded-md">
+            <div className="container mx-auto bg-white mt-3 rounded-md">
               {data.items.map((item: any) => (
                 <Link key={item.id} href={`/items/${item.id}`}>
                   <div className="flex flex-col border-b cursor-pointer text-dark-meli">
                     <div className="flex flex-row">
                       <div className="mx-4 my-4">
                         <Image
-                          src={item.thumbnail}
+                          src={item.picture}
                           alt={item.title}
                           width={180}
                           height={180}
@@ -40,16 +41,16 @@ export default function Items({ data }: any) {
                       </div>
 
                       <div className="flex-grow flex flex-col justify-start">
-                        <div className="flex flex-row py-8">
+                        <div className="flex flex-row pt-8 pb-4">
                           <div className="text-2xl">
-                            {item.price.toLocaleString("es-AR", {
+                            {item.price.amount.toLocaleString("es-AR", {
                               style: "currency",
-                              currency: "ARS",
-                              minimumFractionDigits: 0,
+                              currency: item.price.currency,
+                              minimumFractionDigits: item.price.decimals,
                             })}
                           </div>
                           <div className="flex items-center pl-2">
-                            {item.shipping.free_shipping ? (
+                            {item.free_shipping ? (
                               <Image
                                 src={shippingLogo.src}
                                 alt="Envio Gratis"
@@ -62,10 +63,10 @@ export default function Items({ data }: any) {
                           </div>
                         </div>
 
-                        <div className="text-lg">{item.title}</div>
+                        <div className="text-lg max-w-lg">{item.title}</div>
                       </div>
-                      <div className="hidden md:flex flex-col ml-4 text-xs w-40 text-gray-meli pt-2">
-                        {item.address.state_name}
+                      <div className="hidden md:flex text-xs w-48 text-gray-meli pt-2">
+                        <p className="pt-12"> {item.address}</p>
                       </div>
                     </div>
                   </div>
@@ -90,13 +91,19 @@ export async function getServerSideProps(con: any) {
     }
   );
 
+  const items = data.results.slice(0, 4);
+
+  const parsedItems: Item[] = [...items].map((item: any) => {
+    return parseItem(item);
+  });
+
   const parsedData: SearchItems = {
     author: {
       name: "Nicolas",
       lastname: "Badano",
     },
     categories: parsedCategories.slice(0, 5),
-    items: data.results.slice(0, 4),
+    items: parsedItems,
   };
   return { props: { data: parsedData } };
 }
@@ -107,4 +114,31 @@ const searchItemsByTerm = async (term: string) => {
   const res = await fetch(baseURL + "/sites/MLA/search?q=" + term);
   const data = await res.json();
   return data;
+};
+
+const parseItem = (item: any) => {
+  const {
+    id,
+    title,
+    price,
+    thumbnail,
+    condition,
+    shipping: { free_shipping },
+    currency_id,
+    address,
+  } = item;
+
+  return {
+    id: id,
+    title: title,
+    price: {
+      currency: currency_id,
+      amount: price,
+      decimals: 0,
+    },
+    picture: thumbnail,
+    condition: condition,
+    address: address.state_name,
+    free_shipping: free_shipping,
+  };
 };

@@ -26,8 +26,9 @@ export interface Item {
   picture: string;
   condition: string;
   free_shipping: boolean;
-  sold_quantity: number;
-  description: string;
+  address?: string;
+  sold_quantity?: number;
+  description?: string;
 }
 
 export interface Category {

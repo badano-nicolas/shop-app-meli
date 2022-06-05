@@ -30,7 +30,7 @@ function Header() {
                 placeholder="Nunca dejes de buscar"
                 type="text"
                 defaultValue={searchTerm}
-                className="focus:outline-none flex-grow bg-white"
+                className="focus:outline-none flex-grow bg-white "
               />
               <button
                 type="submit"
