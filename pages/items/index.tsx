@@ -113,6 +113,7 @@ export async function getServerSideProps(con: any) {
       name: "Nicolas",
       lastname: "Badano",
     },
+    // Get the list of categories ordered by results, obtain the first 5, and then reverse the list to change the order
     categories: parsedCategories.slice(0, 5).reverse(),
     items: parsedItems,
   };
