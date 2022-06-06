@@ -27,7 +27,7 @@ export default function ItemsDetail({ data }: ItemsDetailProps) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className="bg-white-meli text-dark-meli min-h-screen pb-8">
-        <Header />
+        <Header query="" />
         <Breadcrumb categories={item.categories ? item.categories : []} />
         <div className="container mx-auto bg-white rounded-sm p-8 ">
           <div className="flex flex-col md:flex-row border-b pb-6 md:border-b-0 md:pb-0 justify-between">

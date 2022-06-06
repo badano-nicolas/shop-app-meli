@@ -14,7 +14,7 @@ const Home: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className="bg-white-meli min-h-screen">
-        <Header />
+        <Header query="" />
       </main>
     </div>
   );

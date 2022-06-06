@@ -25,7 +25,7 @@ export default function Items({ data, search }: ItemsProps) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className="bg-white-meli text-dark-meli min-h-screen pb-8">
-        <Header />
+        <Header query={search} />
         <Breadcrumb categories={data.categories} />
         {items.length === 0 ? (
           <div className="container mx-auto bg-white rounded-sm">

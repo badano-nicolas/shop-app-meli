@@ -4,9 +4,13 @@ import Image from "next/image";
 import logo from "../public/assets/Logo_ML.png";
 import searchIcon from "../public/assets/ic_Search.png";
 
-function Header() {
+type HeaderProps = {
+  query: string;
+};
+
+function Header({ query }: HeaderProps) {
   const inputRef: any = useRef(null);
-  const [searchTerm, setSearchTerm] = useState("");
+  const [searchTerm, setSearchTerm] = useState(query);
   const router = useRouter();
 
   const handleSubmit = useCallback(
