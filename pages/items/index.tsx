@@ -94,12 +94,14 @@ export async function getServerSideProps(con: any) {
   const data = await searchItemsByTerm(query);
 
   const categories = data.available_filters[0].values;
+  categories.sort((firstCategory: any, secondCategory: any) => {
+    return secondCategory.results - firstCategory.results;
+  });
   const parsedCategories: string[] = [...categories].map(
     (category: Category) => {
       return category.name;
     }
   );
-
   const items = data.results.slice(0, 4);
 
   const parsedItems: Item[] = [...items].map((item: Item) => {
@@ -111,7 +113,7 @@ export async function getServerSideProps(con: any) {
       name: "Nicolas",
       lastname: "Badano",
     },
-    categories: parsedCategories.slice(0, 5),
+    categories: parsedCategories.slice(0, 5).reverse(),
     items: parsedItems,
   };
   return { props: { data: parsedData, search: query } };
