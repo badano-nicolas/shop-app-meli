@@ -7,7 +7,7 @@ type BreadcrumbProps = {
 const Breadcrumb = ({ categories }: BreadcrumbProps) => {
   return (
     <div className="flex flex-row text-sm py-4 text-gray-meli container mx-auto">
-      {categories.map((category: any, index: number) => (
+      {categories.map((category: string, index: number) => (
         <div key={category} className="px-1 flex flex-row">
           <p> {index !== 0 && " > "}</p>
           <p

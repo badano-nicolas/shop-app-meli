@@ -7,7 +7,11 @@ import { SearchItems, Category, Item } from "../../actions/searchActions";
 import Breadcrumb from "../../components/Breadcrumb";
 import PriceInfo from "../../components/PriceInfo";
 
-export default function Items({ data }: any) {
+type ItemsProps = {
+  data: SearchItems;
+};
+
+export default function Items({ data }: ItemsProps) {
   const items: Item[] = data.items;
   return (
     <div className="">
@@ -93,7 +97,7 @@ export async function getServerSideProps(con: any) {
 
   const items = data.results.slice(0, 4);
 
-  const parsedItems: Item[] = [...items].map((item: any) => {
+  const parsedItems: Item[] = [...items].map((item: Item) => {
     return parseItem(item);
   });
 

@@ -1,21 +1,25 @@
 import Head from "next/head";
 import Image from "next/image";
-import { SearchItem } from "../../actions/searchActions";
+import { Category, SearchItem } from "../../actions/searchActions";
 import Breadcrumb from "../../components/Breadcrumb";
 import Header from "../../components/Header";
 import PriceInfo from "../../components/PriceInfo";
 
-export default function ItemsDetail({ data }: any) {
+type ItemsDetailProps = {
+  data: SearchItem;
+};
+
+export default function ItemsDetail({ data }: ItemsDetailProps) {
   const item = data.item;
   return (
-    <div className="">
+    <div>
       <Head>
         <title>Shop app Meli</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className="bg-white-meli text-dark-meli min-h-screen pb-8">
         <Header />
-        <Breadcrumb categories={item.categories} />
+        <Breadcrumb categories={item.categories ? item.categories : []} />
         <div className="container mx-auto bg-white rounded-sm p-8 ">
           <div className="flex flex-col md:flex-row border-b pb-6 md:border-b-0 md:pb-0 justify-between">
             <div className="md:w-1/2 md:pr-8">
@@ -97,7 +101,7 @@ export async function getServerSideProps(con: any) {
       sold_quantity: sold_quantity,
       description: plain_text,
       categories: categories.path_from_root.map(
-        (category: any) => category.name
+        (category: Category) => category.name
       ),
     },
   };
