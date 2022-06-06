@@ -14,7 +14,16 @@ export default function ItemsDetail({ data }: ItemsDetailProps) {
   return (
     <div>
       <Head>
-        <title>Shop app Meli</title>
+        <title>{item.title} - Mercado Libre Argentina</title>
+        <meta
+          name="description"
+          content={`${
+            item.free_shipping && "Envíos Gratis en el día ✓"
+          } - Comprá ${
+            item.title
+          } en 12 cuotas. Conocé nuestras increíbles ofertas y promociones en
+          millones de productos`}
+        />
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className="bg-white-meli text-dark-meli min-h-screen pb-8">

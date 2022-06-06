@@ -9,14 +9,19 @@ import PriceInfo from "../../components/PriceInfo";
 
 type ItemsProps = {
   data: SearchItems;
+  search: string;
 };
 
-export default function Items({ data }: ItemsProps) {
+export default function Items({ data, search }: ItemsProps) {
   const items: Item[] = data.items;
   return (
     <div className="">
       <Head>
-        <title>Shop app Meli</title>
+        <title>{search} | Mercado Libre Argentina</title>
+        <meta
+          name="description"
+          content={`Comrprá ${search} en cutas sin interés! Conocé nuestras increíbles ofertas y promociones en millones de productos.`}
+        />
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className="bg-white-meli text-dark-meli min-h-screen pb-8">
@@ -109,7 +114,7 @@ export async function getServerSideProps(con: any) {
     categories: parsedCategories.slice(0, 5),
     items: parsedItems,
   };
-  return { props: { data: parsedData } };
+  return { props: { data: parsedData, search: query } };
 }
 
 const baseURL: string = "https://api.mercadolibre.com";
